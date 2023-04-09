@@ -120,13 +120,49 @@ const createUser1 = ({
 // Without the = {} default value, createUser() with no arguments would throw
 // an error because you can’t try to access properties from undefined
 
-
 //Type Inference
-// Type inference is the process of inferring types based on the context in which 
+// Type inference is the process of inferring types based on the context in which
 // they are used. In JavaScript, it is a very good alternative to type annotations.
 
-// If you provide enough clues for inference in your standard JavaScript function 
+// If you provide enough clues for inference in your standard JavaScript function
 // signatures, you’ll get most of the benefits of type annotations with none of the
 // costs or risks.
 
+const employees = [];
 
+function Developer(name) {
+  this.name = name;
+  this.type = "Developer";
+}
+
+function Tester(name) {
+  this.name = name;
+  this.type = "Tester";
+}
+
+function EmployeeFactory() {
+  this.create = (name, type) => {
+    switch (type) {
+      case 1:
+        return new Developer(name);
+        break;
+      case 2:
+        return new Tester(name);
+        break;
+      default:
+        return "Incorrect input";
+    }
+  };
+}
+
+function displayInfo() {
+  console.log (`${this.name} ${this.type}`)
+}
+
+const empFactory = new EmployeeFactory();
+employees.push(empFactory.create("John", 1));
+employees.push(empFactory.create("Dave", 1));
+employees.push(empFactory.create("Michael", 2));
+employees.push(empFactory.create("Morris", 2));
+
+employees.forEach((emp) => displayInfo.call(emp));
