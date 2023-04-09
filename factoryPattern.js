@@ -130,14 +130,26 @@ const createUser1 = ({
 
 const employees = [];
 
+function generateId() {
+  return Math.floor(Math.random() * 10000);
+}
+
 function Developer(name) {
   this.name = name;
   this.type = "Developer";
+  this.id = generateId();
 }
 
 function Tester(name) {
   this.name = name;
   this.type = "Tester";
+  this.id = generateId();
+}
+
+function Manager(name) {
+  this.name = name;
+  this.type = "Manager";
+  this.id = generateId();
 }
 
 function EmployeeFactory() {
@@ -149,6 +161,9 @@ function EmployeeFactory() {
       case 2:
         return new Tester(name);
         break;
+      case 3:
+        return new Manager(name);
+        break;
       default:
         return "Incorrect input";
     }
@@ -156,13 +171,13 @@ function EmployeeFactory() {
 }
 
 function displayInfo() {
-  console.log (`${this.name} ${this.type}`)
+  console.log(`${this.name} ${this.type} ${this.id}`);
 }
 
 const empFactory = new EmployeeFactory();
 employees.push(empFactory.create("John", 1));
 employees.push(empFactory.create("Dave", 1));
 employees.push(empFactory.create("Michael", 2));
-employees.push(empFactory.create("Morris", 2));
+employees.push(empFactory.create("Morris", 3));
 
 employees.forEach((emp) => displayInfo.call(emp));
